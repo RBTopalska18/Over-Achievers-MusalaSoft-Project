@@ -3,8 +3,8 @@
 ## Hello, we are Over Achievers!
 
 
-We are developing a program, which will help anyone to create notes where they can write enything about work or list with products. 
-The program will be a way for them to organise themselves. You can see our presentation here:
+We are developing a program, which will help anyone to reserve a ticket for a flight to Italy, France and Germany.They can choose if they want to fly with cheaper tickets or to choose the time they want to fly. 
+The program will be a way for them to organise there trips. You can see our presentation here:
 [PRESENTATION]()
 
 ---
