@@ -1,4 +1,4 @@
-#include <iostream>
+/*#include <iostream>
 #include <windows.h>
 #include <fstream>
 #include <stdlib.h>
@@ -9,6 +9,8 @@
 #include <vector>
 #include <chrono>
 #include <thread>
+
+
 using namespace std;
 
 void wait(int delay = 200);
@@ -49,12 +51,12 @@ void wait(int delay)
 void welcome()
 {
     spaces(20); cout << YELLOW << "*******************************************************" << RESET << endl;
-    spaces(20); cout << WHITE << "                          NOTE                         " << RESET << endl;
-    spaces(20); cout << WHITE << "                          LIST                         " << RESET << endl;
+    spaces(20); cout << WHITE << "                         AIRPLANE                        " << RESET << endl;
+    spaces(20); cout << WHITE << "                          AGENCY                         " << RESET << endl;
     spaces(20); cout << YELLOW << "*******************************************************" << RESET << endl;
 
 }
-void displayMainMenu()
+void displayFlightsMenu()
 {
     cout << endl;
     wait(500);
@@ -62,17 +64,61 @@ void displayMainMenu()
     wait();
     spaces(20);  cout << "||                                                   ||" << endl;
     wait();
-    spaces(20);  cout << YELLOW << "||                  _____MENU_____                   ||" << RESET << endl;
+    spaces(20);  cout << YELLOW << "||                  _____FLIGHTS_____                ||" << RESET << endl;
     wait();
     spaces(20);  cout << "||                                                   ||" << endl;
     wait();
-    spaces(20);  cout << "||                   1. Last Note                    ||" << endl;
+    spaces(20);  cout << "||                   1.All flights                   ||" << endl;
     wait();
-    spaces(20);  cout << "||                   2. All Notes                    ||" << endl;
+    spaces(20);  cout << "||                   2.Cheaper price                 ||" << endl;
     wait();
-    spaces(20);  cout << "||                   3. Add Note                     ||" << endl;
+    spaces(20);  cout << "||                   3.Flight time                   ||" << endl;
     wait();
-    spaces(20);  cout << "||                   4. Delete Note                  ||" << endl;
+    spaces(20);  cout << "||                   4. Exit                         ||" << endl;
+    wait();
+    spaces(20);  cout << YELLOW << "_______________________________________________________" << RESET << endl;
+    wait();
+    cout << endl;
+}
+
+void displayPlane()
+{
+    cout << endl;
+    wait(500);
+    spaces(20);  cout << YELLOW << "_______________________________________________________" << RESET << endl;
+    wait();
+    spaces(20);  cout << "||                                                   ||" << endl;
+    wait();
+    spaces(20);  cout << YELLOW << "||                  _____TICKETS_____                ||" << RESET << endl;
+    wait();
+    spaces(20);  cout << "||                                                   ||" << endl;
+    wait();
+    spaces(20);  cout << "||                   1.Reserve ticke  t                ||" << endl;
+    wait();
+    spaces(20);  cout << "||                   2. Exit                         ||" << endl;
+    wait();
+    spaces(20);  cout << YELLOW << "_______________________________________________________" << RESET << endl;
+    wait();
+    cout << endl;
+}
+
+void displayCountry()
+{
+    cout << endl;
+    wait(500);
+    spaces(20);  cout << YELLOW << "_______________________________________________________" << RESET << endl;
+    wait();
+    spaces(20);  cout << "||                                                   ||" << endl;
+    wait();
+    spaces(20);  cout << YELLOW << "||                  _____COUNTRY_____                ||" << RESET << endl;
+    wait();
+    spaces(20);  cout << "||                                                   ||" << endl;
+    wait();
+    spaces(20);  cout << "||                   1.Italy                         ||" << endl;
+    wait();
+    spaces(20);  cout << "||                   2.France                        ||" << endl;
+    wait();
+    spaces(20);  cout << "||                   3.Germany                       ||" << endl;
     wait();
     spaces(20);  cout << "||                   5. Exit                         ||" << endl;
     wait();
@@ -83,5 +129,59 @@ void displayMainMenu()
 int main()
 {
     welcome();
-    displayMainMenu();
+    displayFlightsMenu();
+}*/
+
+#include <nanodbc.h>
+#include <iostream>
+#include <exception>
+
+using namespace std;
+
+int main() try
+{
+    auto const connstr = NANODBC_TEXT("Driver={ODBC Driver 17 for SQL Server};Server=(localdb)\\MSSQLLocalDB;Database=BikeStores;Trusted_Connection=yes;");
+    nanodbc::connection conn(connstr);
+
+    nanodbc::statement stmt(conn);
+
+    nanodbc::prepare(stmt, R"(
+            SELECT TOP (1000) [customer_id]
+                  ,[first_name]
+                  ,[last_name]
+                  ,[phone]
+                  ,[email]
+                  ,[street]
+                  ,[city]
+                  ,[state]
+                  ,[zip_code]
+              FROM [BikeStores].[sales].[customers]
+            WHERE customer_id > ? AND customer_id < ?
+    )");
+
+    int id1 = 4;
+    int id2 = 8;
+    stmt.bind(0, &id1);
+    stmt.bind(1, &id2);
+
+    auto result = nanodbc::execute(stmt);
+
+    while (result.next())
+    {
+        cout << result.get<int>("customer_id", -1)
+            << ", "
+            << result.get<nanodbc::string>("first_name", "!")
+            << ", "
+            << result.get<nanodbc::string>("last_name", "!")
+            << ", "
+            << result.get<nanodbc::string>("phone", "!")
+            << endl;
+    }
+
+    return EXIT_SUCCESS;
+}
+catch (std::exception& e)
+{
+    std::cerr << e.what() << std::endl;
+    return EXIT_FAILURE;
 }
