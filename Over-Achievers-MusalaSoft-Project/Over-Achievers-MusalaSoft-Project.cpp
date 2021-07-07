@@ -1,4 +1,4 @@
-/*#include <iostream>
+#include <iostream>
 #include <windows.h>
 #include <fstream>
 #include <stdlib.h>
@@ -81,7 +81,7 @@ void displayFlightsMenu()
     cout << endl;
 }
 
-void displayPlane()
+void displayTicketMenu()
 {
     cout << endl;
     wait(500);
@@ -93,7 +93,7 @@ void displayPlane()
     wait();
     spaces(20);  cout << "||                                                   ||" << endl;
     wait();
-    spaces(20);  cout << "||                   1.Reserve ticke  t                ||" << endl;
+    spaces(20);  cout << "||                   1.Reserve ticket                ||" << endl;
     wait();
     spaces(20);  cout << "||                   2. Exit                         ||" << endl;
     wait();
@@ -120,68 +120,98 @@ void displayCountry()
     wait();
     spaces(20);  cout << "||                   3.Germany                       ||" << endl;
     wait();
-    spaces(20);  cout << "||                   5. Exit                         ||" << endl;
+    spaces(20);  cout << "||                   4. Exit                         ||" << endl;
     wait();
     spaces(20);  cout << YELLOW << "_______________________________________________________" << RESET << endl;
     wait();
     cout << endl;
 }
+
+    
+void printMenu()
+{
+    int choice = 0;
+    welcome();
+    while (choice != 5) {
+        cout << endl;
+        displayTicketMenu();
+        cout << endl;
+        spaces(20); cout << "Enter an option: ";
+        cin >> choice;
+
+        while (choice > 2 || choice < 1)
+        {
+            cout << endl;
+            cout << RED << "You have to enter a number between 1 and 2! Please try again!" << RESET;
+           
+        }
+        system("cls");
+        switch (choice)
+        {
+        case 1:
+            int countryChoice;
+            displayCountry();
+            cout << endl;
+            spaces(20); cout << "Enter an option: ";
+            cin >> countryChoice;
+
+            while (countryChoice > 2 || countryChoice < 1)
+            {
+                cout << endl;
+                cout << RED << "You have to enter a number between 1 and 2! Please try again!" << RESET;
+
+            }
+            system("cls");
+            switch (countryChoice)
+            {
+            case 1:
+                int flightChoice;
+                displayFlightsMenu();
+                cout << endl;
+                spaces(20); cout << "Enter an option: ";
+                cin >> flightChoice;
+
+                while (flightChoice > 2 || flightChoice < 1)
+                {
+                    cout << endl;
+                    cout << RED << "You have to enter a number between 1 and 2! Please try again!" << RESET;
+
+                }
+                system("cls");
+                switch (flightChoice)
+                {
+                    case 1:
+                        //function that display all flights to Italy/France/Germany
+                        break;
+                    case 2:
+                        //function that display cheaper flights to Italy/France/Germany
+                        break;
+                    case 3:
+                        //function that display choosen time flights to Italy/France/Germany
+                        break;
+                }
+                
+                break;
+            case 2:
+                displayFlightsMenu();
+                break;
+            case 3:
+                displayFlightsMenu();
+                break;
+            case 4:
+                exit(0);
+                break;
+            }
+            break;
+        case 2:
+            exit(0);
+            break;
+        }
+    }
+}
+
 int main()
 {
-    welcome();
-    displayFlightsMenu();
-}*/
-
-#include <nanodbc.h>
-#include <iostream>
-#include <exception>
-
-using namespace std;
-
-int main() try
-{
-    auto const connstr = NANODBC_TEXT("Driver={ODBC Driver 17 for SQL Server};Server=(localdb)\\MSSQLLocalDB;Database=BikeStores;Trusted_Connection=yes;");
-    nanodbc::connection conn(connstr);
-
-    nanodbc::statement stmt(conn);
-
-    nanodbc::prepare(stmt, R"(
-            SELECT TOP (1000) [customer_id]
-                  ,[first_name]
-                  ,[last_name]
-                  ,[phone]
-                  ,[email]
-                  ,[street]
-                  ,[city]
-                  ,[state]
-                  ,[zip_code]
-              FROM [BikeStores].[sales].[customers]
-            WHERE customer_id > ? AND customer_id < ?
-    )");
-
-    int id1 = 4;
-    int id2 = 8;
-    stmt.bind(0, &id1);
-    stmt.bind(1, &id2);
-
-    auto result = nanodbc::execute(stmt);
-
-    while (result.next())
-    {
-        cout << result.get<int>("customer_id", -1)
-            << ", "
-            << result.get<nanodbc::string>("first_name", "!")
-            << ", "
-            << result.get<nanodbc::string>("last_name", "!")
-            << ", "
-            << result.get<nanodbc::string>("phone", "!")
-            << endl;
-    }
-
-    return EXIT_SUCCESS;
+ 
 }
-catch (std::exception& e)
-{
-    std::cerr << e.what() << std::endl;
-    return EXIT_FAILURE;
-}
+
