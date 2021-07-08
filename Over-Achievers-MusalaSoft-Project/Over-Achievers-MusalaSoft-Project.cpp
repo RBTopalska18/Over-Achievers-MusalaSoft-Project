@@ -51,7 +51,101 @@ int printAllFlightsFromItaly()
     )");
 
 
-		string name1 = "Italy";
+		string name1 = "Italy,Venice";
+		stmt.bind(0, name1.c_str());
+		auto result = nanodbc::execute(stmt);
+
+		while (result.next())
+		{
+			std::cout << result.get<int>("CountryId", -1)
+				<< ", "
+				<< result.get<nanodbc::string>("Name", "NULL")
+				<< ", "
+				<< result.get<nanodbc::string>("Time", "NULL")
+				<< ", "
+				<< result.get<nanodbc::string>("ArrivalDestination", "NULL")
+				<< ", "
+				<< result.get<double>("Price", -1)
+				<< endl;
+		}
+
+		return EXIT_SUCCESS;
+	}
+	catch (std::exception& e)
+	{
+		std::cerr << e.what() << std::endl;
+		return EXIT_FAILURE;
+	}
+}
+
+int printAllFlightsFromGermany()
+{
+	try {
+		auto const connstr = NANODBC_TEXT("Driver={ODBC Driver 17 for SQL Server};Server=(localdb)\\MSSQLLocalDB;Database=AirPort;Trusted_Connection=yes;");
+		nanodbc::connection conn(connstr);
+
+		nanodbc::statement stmt(conn);
+
+		nanodbc::prepare(stmt, R"(
+            SELECT TOP (1000) [CountryId]
+                  ,[Name]
+                  ,[Time]
+                  ,[ArrivalDestination]
+                  ,[Price]
+              FROM [AirPort].[dbo].[Country]
+              WHERE Name = ?
+              
+    )");
+
+
+		string name1 = "Germany,Berlin";
+		stmt.bind(0, name1.c_str());
+		auto result = nanodbc::execute(stmt);
+
+		while (result.next())
+		{
+			std::cout << result.get<int>("CountryId", -1)
+				<< ", "
+				<< result.get<nanodbc::string>("Name", "NULL")
+				<< ", "
+				<< result.get<nanodbc::string>("Time", "NULL")
+				<< ", "
+				<< result.get<nanodbc::string>("ArrivalDestination", "NULL")
+				<< ", "
+				<< result.get<double>("Price", -1)
+				<< endl;
+		}
+
+		return EXIT_SUCCESS;
+	}
+	catch (std::exception& e)
+	{
+		std::cerr << e.what() << std::endl;
+		return EXIT_FAILURE;
+	}
+}
+
+int printAllFlightsFromFrance()
+{
+	try {
+		auto const connstr = NANODBC_TEXT("Driver={ODBC Driver 17 for SQL Server};Server=(localdb)\\MSSQLLocalDB;Database=AirPort;Trusted_Connection=yes;");
+		nanodbc::connection conn(connstr);
+
+		nanodbc::statement stmt(conn);
+
+		nanodbc::prepare(stmt, R"(
+            SELECT TOP (1000) [CountryId]
+                  ,[Name]
+                  ,[Time]
+                  ,[ArrivalDestination]
+                  ,[Price]
+              FROM [AirPort].[dbo].[Country]
+              WHERE Name = ?
+              
+    )");
+
+
+		string name1 = "France,Paris";
 		stmt.bind(0, name1.c_str());
 		auto result = nanodbc::execute(stmt);
 
@@ -87,6 +181,7 @@ void spaces(unsigned short int n)
 		cout << " ";
 	}
 }
+
 void wait(int delay)
 {
 	if (ANIMATION_ENABLED)
@@ -94,6 +189,7 @@ void wait(int delay)
 		this_thread::sleep_for(chrono::milliseconds(delay));
 	}
 }
+
 void welcome()
 {
 	spaces(20); cout << YELLOW << "*******************************************************" << RESET << endl;
@@ -102,6 +198,7 @@ void welcome()
 	spaces(20); cout << YELLOW << "*******************************************************" << RESET << endl;
 
 }
+
 void displayFlightsMenu()
 {
 	cout << endl;
@@ -160,11 +257,11 @@ void displayCountry()
 	wait();
 	spaces(20);  cout << "||                                                   ||" << endl;
 	wait();
-	spaces(20);  cout << "||                   1.Italy                         ||" << endl;
+	spaces(20);  cout << "||                   1.Italy,Venice                  ||" << endl;
 	wait();
-	spaces(20);  cout << "||                   2.France                        ||" << endl;
+	spaces(20);  cout << "||                   2.France,Paris                  ||" << endl;
 	wait();
-	spaces(20);  cout << "||                   3.Germany                       ||" << endl;
+	spaces(20);  cout << "||                   3.Germany,Berlin                ||" << endl;
 	wait();
 	spaces(20);  cout << "||                   4. Exit                         ||" << endl;
 	wait();
@@ -173,6 +270,92 @@ void displayCountry()
 	cout << endl;
 }
 
+void flightChoiceItaly()
+{
+	int flightChoice;
+	displayFlightsMenu();
+	cout << endl;
+	spaces(20); cout << "Enter an option: ";
+	cin >> flightChoice;
+
+	while (flightChoice > 4 || flightChoice < 1)
+	{
+		cout << endl;
+		cout << RED << "You have to enter a number between 1 and 4! Please try again!" << RESET;
+
+	}
+	system("cls");
+	switch (flightChoice)
+	{
+	case 1:
+		printAllFlightsFromItaly();
+		break;
+	case 2:
+		//function that display cheaper flights to Italy/France/Germany
+		break;
+	case 3:
+		//function that display choosen time flights to Italy/France/Germany
+		break;
+	}
+}
+
+void flightChoiceFrance()
+{
+	int flightChoice;
+	displayFlightsMenu();
+	cout << endl;
+	spaces(20); cout << "Enter an option: ";
+	cin >> flightChoice;
+
+	while (flightChoice > 4 || flightChoice < 1)
+	{
+		cout << endl;
+		cout << RED << "You have to enter a number between 1 and 4! Please try again!" << RESET;
+
+	}
+	system("cls");
+	switch (flightChoice)
+	{
+	case 1:
+		printAllFlightsFromFrance();
+		break;
+	case 2:
+		//function that display cheaper flights to Italy/France/Germany
+		break;
+	case 3:
+		//function that display choosen time flights to Italy/France/Germany
+		break;
+	}
+}
+
+void flightChoiceGermany()
+{
+	int flightChoice;
+	displayFlightsMenu();
+	cout << endl;
+	spaces(20); cout << "Enter an option: ";
+	cin >> flightChoice;
+
+	while (flightChoice > 4 || flightChoice < 1)
+	{
+		cout << endl;
+		cout << RED << "You have to enter a number between 1 and 4! Please try again!" << RESET;
+
+	}
+	system("cls");
+	switch (flightChoice)
+	{
+	case 1:
+		printAllFlightsFromGermany();
+		break;
+	case 2:
+		//function that display cheaper flights to Italy/France/Germany
+		break;
+	case 3:
+		//function that display choosen time flights to Italy/France/Germany
+		break;
+	}
+}
 
 void printMenu()
 {
@@ -211,38 +394,13 @@ void printMenu()
 			switch (countryChoice)
 			{
 			case 1:
-				int flightChoice;
-				displayFlightsMenu();
-				cout << endl;
-				spaces(20); cout << "Enter an option: ";
-				cin >> flightChoice;
-
-				while (flightChoice > 4 || flightChoice < 1)
-				{
-					cout << endl;
-					cout << RED << "You have to enter a number between 1 and 4! Please try again!" << RESET;
-
-				}
-				system("cls");
-				switch (flightChoice)
-				{
-				case 1:
-					printAllFlightsFromItaly();
-					break;
-				case 2:
-					//function that display cheaper flights to Italy/France/Germany
-					break;
-				case 3:
-					//function that display choosen time flights to Italy/France/Germany
-					break;
-				}
-
+				flightChoiceItaly();
 				break;
 			case 2:
-				displayFlightsMenu();
+				//
 				break;
 			case 3:
-				displayFlightsMenu();
+				//
 				break;
 			case 4:
 				exit(0);
