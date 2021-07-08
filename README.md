@@ -17,8 +17,7 @@ Download the program from [github](https://github.com/RBTopalska18/Over-Achiever
 ---
 
 ## <img src="https://media.discordapp.net/attachments/856937460567113728/861851415495442452/tmp_1625551760215.jpg" width="70">Team members and roles
-- Reneta Topalska  - BackEnd and FrontEnd Development
-- Zhenya Yordanova - Documentary and Designer
+- Reneta Topalska  - BackEnd and FrontEnd Development, Documentation and Presentation
 ---
 
 ## <img src="https://media.discordapp.net/attachments/856937460567113728/861851415495442452/tmp_1625551760215.jpg" width="70"> Used technologies
