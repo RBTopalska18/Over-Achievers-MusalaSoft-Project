@@ -1,0 +1,130 @@
+body,h1,h5 {font-family: "Raleway", sans-serif}
+body, html {height: 100%}
+body {
+  background-image: url("../Photos/background4.jpg");
+  min-height: 100%;
+  background-position: center;
+  background-size: cover;
+}
+
+h2{
+	margin-top:1%;
+	text-align:center;
+	font-size:26px;
+}
+
+h6{
+	text-align:center;
+	font-size:15px;
+	margin-bottom:5%;
+	color:#8fcef2;
+	text-shadow:0.5px 0.5px 0px black;
+}
+
+a{
+	text-decoration:none;
+	color:inherit;
+}
+
+.inner-div{
+	padding:1%;
+	border: solid white;
+	width:98%;
+	height:98%;
+	border-radius:32px;
+}
+
+form {
+	width:60%;
+	height:60%;
+	margin-top:3%;
+	margin-left: 17%;
+	margin-right: 5%;
+	background: rgba(92, 186, 202, 0.7);
+	padding: 1%;
+	border-radius: 32px;
+	text-align: initial;
+	font-size: 1.8em;
+	color: rgb(238, 238, 238);
+}
+
+.formRow {
+	display: flex;
+	opacity: 0.9;
+	margin: 50px 6%;
+	text-align: center;
+	flex-wrap: wrap;
+	margin-top: 12px;
+}
+
+.formRow > * {
+	flex-grow: 1;
+}
+
+.formRow > .textbox {
+	flex-basis: 169px;
+	flex-grow: 2;
+}
+
+.formRow > .textbox, .formRow > textarea {
+	font-size: 1em;
+}
+
+.formRow p {
+	display: inline-block;
+	flex-basis: 0;
+	margin: 0px;
+	margin-right: 20px;
+	text-align: right;
+}
+
+.formRow textarea {
+	width: calc(90% - 4px);
+	height: 100px;
+	resize: vertical;
+}
+
+#submitBtn {
+	height: 40px;
+	width: 100px;
+	padding: 0px;
+	margin-left: calc(50% - 50px);
+	margin-bottom: 10px;
+	font-size: 18px;
+	background-color: #69b8e6;
+	color: rgb(238, 238, 238);
+	border-width: 0px;
+	cursor: pointer;
+	border-radius:32px;
+}
+
+ul {
+	list-style-type: none;
+	margin: 1%;
+	padding: 0;
+	overflow: hidden;
+  }
+
+  li {
+	float: right;
+  }
+
+  li a {
+	display: block;
+    color: white;
+    background-color:black;
+	font-size:23px;
+	padding: 8px;
+    text-align:center;
+	text-decoration:none;
+	padding: 14px 16px;
+  }
+
+  li a:hover {
+	color:#69b8e6;
+	transition-duration:0.2s;
+  }
+
+  .fontcolor{
+	  color:white;
+  }

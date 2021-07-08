@@ -1,0 +1,52 @@
+body,h1,h5 {font-family: "Raleway", sans-serif}
+body, html {height: 100%}
+body {
+  background-image: url("../Photos/background2.jpg");
+  min-height: 100%;
+  background-position: center;
+  background-size: cover;
+}
+.black
+{
+color:#fff;
+background-color:#000;
+}
+.hover-red:hover
+{
+    color:#fff;
+    background-color:#f44336;
+}
+.hover-green:hover
+{
+    color:#fff;
+    background-color:#0e8f2e;
+}
+.hover-blue:hover
+{
+    color:#fff;
+    background-color:#1682c0;
+}
+.bar-block {
+    height: 17%;
+    width:120%;
+    display:block;
+    padding:8px 16px;
+    text-align:left;
+    border:none;
+    white-space:normal;
+    outline:0; 
+}
+a{
+	text-decoration:none;
+	color:inherit;
+}
+.display-middle
+{position:absolute;
+top: 50%;
+left: 41%;
+color:rgb(255, 255, 255);
+}
+.jumbo
+{
+    font-size:64px;
+}

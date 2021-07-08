@@ -1,0 +1,53 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<title>ContactUs</title>
+	<meta charset="utf-8">
+	<script src="form.js"></script>
+	<link rel="stylesheet" type="text/css" href="../CSS/ContactUs.css">
+	<link rel="stylesheet" type="text/css" href="../JavaScript/form.js">
+</head>
+<body>
+	<ul>
+		<li><a href="../HTML/Index.html" >Home</a></li>
+		<li><a href="../HTML/AboutUs.html" >About Us</a></li>
+		<li><a href="../HTML/Information.html" >Information</a></li>
+	</ul>
+
+
+	<form id="contactForm">
+		<div class="inner-div">
+		<h2 class="fontcolor">Contact Us:</h2>
+		<div class="formRow red-div">
+			<p>Type:</p>
+			<select class="textbox" name="type" onchange="textareaPlaceholderUpdate();">
+				<option value="Question">Question</option>
+				<option value="Suggestion">Suggestion</option>
+				<option value="Feedback">General Feedback</option>
+			</select>
+		</div>
+		<div class="formRow">
+			<p>Name:</p>
+			<input class="textbox" type="text" name="name" placeholder="Please enter your name">
+		</div>
+		<div class="formRow">
+			<p>Subject:</p>
+			<input class="textbox" type="text" name="subject" placeholder="Please enter a short subject">
+		</div>
+		<div class="formRow">
+			<textarea name="bodytext" placeholder="Please enter your question here"></textarea>
+		</div>
+
+		<input type="button" id="submitBtn" value="Submit" onclick="formsubmit();">
+
+		<p style="font-size:15px; text-align:center">
+			Or you can contact us directly at <b><a id="mailLink" style="color:#69b8e6; text-shadow:0.5px 0.5px 0px black" href="mailto:theoverachievers@abv.bg">theoverachievers@abv.bg</a></b>. <br>
+		</p>
+
+		</div>
+
+	</form>
+
+
+</body>
+</html>
