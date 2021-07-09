@@ -192,7 +192,7 @@ int printCheaperFlightsFromItaly(double priceItaly)
     )");
 		string name1 = "Italy,Venice";
 		stmt.bind(0, &priceItaly); 
-		stmt.bind(0, name1.c_str()); 
+		stmt.bind(1, name1.c_str()); 
 		auto result = nanodbc::execute(stmt);
 
 		while (result.next())
@@ -238,7 +238,7 @@ int printCheaperFlightsFromFrance(double priceFrance)
     )");
 		string name1 = "France,Paris";
 		stmt.bind(0, &priceFrance);
-		stmt.bind(0, name1.c_str());
+		stmt.bind(1, name1.c_str());
 		auto result = nanodbc::execute(stmt);
 
 		while (result.next())
@@ -284,7 +284,7 @@ int printCheaperFlightsFromGermany(double priceGermany)
     )");
 		string name1 = "France,Paris";
 		stmt.bind(0, &priceGermany);
-		stmt.bind(0, name1.c_str());
+		stmt.bind(1, name1.c_str());
 		auto result = nanodbc::execute(stmt);
 
 		while (result.next())
@@ -352,9 +352,11 @@ void displayFlightsMenu()
 	wait();
 	spaces(20);  cout << "||                   2.Cheaper price                 ||" << endl;
 	wait();
-	spaces(20);  cout << "||                   3.Flight time                   ||" << endl;
+	spaces(20);  cout << "||                   3.Destination                   ||" << endl;
 	wait();
-	spaces(20);  cout << "||                   4. Exit                         ||" << endl;
+	spaces(20);  cout << "||                   4.Time                          ||" << endl;
+	wait();
+	spaces(20);  cout << "||                   5.Exit                          ||" << endl;
 	wait();
 	spaces(20);  cout << YELLOW << "_______________________________________________________" << RESET << endl;
 	wait();
@@ -400,7 +402,7 @@ void displayCountry()
 	wait();
 	spaces(20);  cout << "||                   3.Germany,Berlin                ||" << endl;
 	wait();
-	spaces(20);  cout << "||                   4. Exit                         ||" << endl;
+	spaces(20);  cout << "||                   4.Exit                          ||" << endl;
 	wait();
 	spaces(20);  cout << YELLOW << "_______________________________________________________" << RESET << endl;
 	wait();
@@ -488,7 +490,6 @@ void displayDestinationForGermany()
 	cout << endl;
 }
 
-
 void flightChoiceItaly()
 {
 	int flightChoice;
@@ -498,10 +499,10 @@ void flightChoiceItaly()
 	spaces(20); cout << "Enter an option: ";
 	cin >> flightChoice;
 
-	while (flightChoice > 4 || flightChoice < 1)
+	while (flightChoice > 5 || flightChoice < 1)
 	{
 		cout << endl;
-		cout << RED << "You have to enter a number between 1 and 4! Please try again!" << RESET;
+		cout << RED << "You have to enter a number between 1 and 5! Please try again!" << RESET;
 
 	}
 	system("cls");
@@ -514,10 +515,15 @@ void flightChoiceItaly()
 		cout << "Enter the biggest price you can allow:";
 		cin >> priceItaly;
 		cout << endl;
-		printCheaperFlightsFromFrance(priceItaly);
+		printCheaperFlightsFromItaly(priceItaly);
 		break;
 	case 3:
-		//function that display choosen time flights to Italy/France/Germany
+		displayDestinationForItaly();
+		break;
+	case 4:
+		break;
+	case 5:
+		exit(0);
 		break;
 	}
 }
@@ -531,10 +537,10 @@ void flightChoiceFrance()
 	spaces(20); cout << "Enter an option: ";
 	cin >> flightChoice;
 
-	while (flightChoice > 4 || flightChoice < 1)
+	while (flightChoice > 5 || flightChoice < 1)
 	{
 		cout << endl;
-		cout << RED << "You have to enter a number between 1 and 4! Please try again!" << RESET;
+		cout << RED << "You have to enter a number between 1 and 5! Please try again!" << RESET;
 
 	}
 	system("cls");
@@ -550,7 +556,12 @@ void flightChoiceFrance()
 		printCheaperFlightsFromFrance(priceFrance);
 		break;
 	case 3:
-		//function that display choosen time flights to Italy/France/Germany
+		displayDestinationForFrance();
+		break;
+	case 4:
+		break;
+	case 5:
+		exit(0);
 		break;
 	}
 }
@@ -564,10 +575,10 @@ void flightChoiceGermany()
 	spaces(20); cout << "Enter an option: ";
 	cin >> flightChoice;
 
-	while (flightChoice > 4 || flightChoice < 1)
+	while (flightChoice > 5 || flightChoice < 1)
 	{
 		cout << endl;
-		cout << RED << "You have to enter a number between 1 and 4! Please try again!" << RESET;
+		cout << RED << "You have to enter a number between 1 and 5! Please try again!" << RESET;
 
 	}
 	system("cls");
@@ -583,7 +594,12 @@ void flightChoiceGermany()
 		printCheaperFlightsFromGermany(priceGermany);
 		break;
 	case 3:
-		//function that display choosen time flights to Italy/France/Germany
+		displayDestinationForGermany();
+		break;
+	case 4:
+		break;
+	case 5:
+		exit(0);
 		break;
 	}
 }
@@ -647,6 +663,6 @@ void printMenu()
 
 int main()
 {
-	
+	printMenu();
 }
 
