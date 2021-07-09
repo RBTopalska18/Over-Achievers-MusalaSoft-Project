@@ -310,6 +310,144 @@ int printCheaperFlightsFromGermany(double priceGermany)
 	}
 }
 
+int printFlightsFromItalyToDestination(string ArrivalDestination)
+{
+	try {
+		auto const connstr = NANODBC_TEXT("Driver={ODBC Driver 17 for SQL Server};Server=(localdb)\\MSSQLLocalDB;Database=AirPort;Trusted_Connection=yes;");
+		nanodbc::connection conn(connstr);
+
+		nanodbc::statement stmt(conn);
+
+		nanodbc::prepare(stmt, R"(
+            SELECT TOP (1000) [CountryId]
+                  ,[Name]
+                  ,[Time]
+                  ,[ArrivalDestination]
+                  ,[Price]
+              FROM [AirPort].[dbo].[Country]
+              WHERE  ArrivalDestination = ? AND Name = ?
+              
+    )");
+		string name1 = "Italy,Venice";
+		stmt.bind(0, ArrivalDestination.c_str());
+		stmt.bind(1, name1.c_str());
+		auto result = nanodbc::execute(stmt);
+
+		while (result.next())
+		{
+			std::cout << result.get<int>("CountryId", -1)
+				<< ", "
+				<< result.get<nanodbc::string>("Name", "NULL")
+				<< ", "
+				<< result.get<nanodbc::string>("Time", "NULL")
+				<< ", "
+				<< result.get<nanodbc::string>("ArrivalDestination", "NULL")
+				<< ", "
+				<< result.get<double>("Price", -1)
+				<< endl;
+		}
+
+		return EXIT_SUCCESS;
+	}
+	catch (std::exception& e)
+	{
+		std::cerr << e.what() << std::endl;
+		return EXIT_FAILURE;
+	}
+}
+
+int printFlightsFromFranceToDestination(string ArrivalDestination)
+{
+	try {
+		auto const connstr = NANODBC_TEXT("Driver={ODBC Driver 17 for SQL Server};Server=(localdb)\\MSSQLLocalDB;Database=AirPort;Trusted_Connection=yes;");
+		nanodbc::connection conn(connstr);
+
+		nanodbc::statement stmt(conn);
+
+		nanodbc::prepare(stmt, R"(
+            SELECT TOP (1000) [CountryId]
+                  ,[Name]
+                  ,[Time]
+                  ,[ArrivalDestination]
+                  ,[Price]
+              FROM [AirPort].[dbo].[Country]
+              WHERE  ArrivalDestination = ? AND Name = ?
+              
+    )");
+		string name1 = "France,Paris";
+		stmt.bind(0, ArrivalDestination.c_str());
+		stmt.bind(1, name1.c_str());
+		auto result = nanodbc::execute(stmt);
+
+		while (result.next())
+		{
+			std::cout << result.get<int>("CountryId", -1)
+				<< ", "
+				<< result.get<nanodbc::string>("Name", "NULL")
+				<< ", "
+				<< result.get<nanodbc::string>("Time", "NULL")
+				<< ", "
+				<< result.get<nanodbc::string>("ArrivalDestination", "NULL")
+				<< ", "
+				<< result.get<double>("Price", -1)
+				<< endl;
+		}
+
+		return EXIT_SUCCESS;
+	}
+	catch (std::exception& e)
+	{
+		std::cerr << e.what() << std::endl;
+		return EXIT_FAILURE;
+	}
+}
+
+int printFlightsFromGermanyToDestination(string ArrivalDestination)
+{
+	try {
+		auto const connstr = NANODBC_TEXT("Driver={ODBC Driver 17 for SQL Server};Server=(localdb)\\MSSQLLocalDB;Database=AirPort;Trusted_Connection=yes;");
+		nanodbc::connection conn(connstr);
+
+		nanodbc::statement stmt(conn);
+
+		nanodbc::prepare(stmt, R"(
+            SELECT TOP (1000) [CountryId]
+                  ,[Name]
+                  ,[Time]
+                  ,[ArrivalDestination]
+                  ,[Price]
+              FROM [AirPort].[dbo].[Country]
+              WHERE  ArrivalDestination = ? AND Name = ?
+              
+    )");
+		string name1 = "Germany,Berlin";
+		stmt.bind(0, ArrivalDestination.c_str());
+		stmt.bind(1, name1.c_str());
+		auto result = nanodbc::execute(stmt);
+
+		while (result.next())
+		{
+			std::cout << result.get<int>("CountryId", -1)
+				<< ", "
+				<< result.get<nanodbc::string>("Name", "NULL")
+				<< ", "
+				<< result.get<nanodbc::string>("Time", "NULL")
+				<< ", "
+				<< result.get<nanodbc::string>("ArrivalDestination", "NULL")
+				<< ", "
+				<< result.get<double>("Price", -1)
+				<< endl;
+		}
+
+		return EXIT_SUCCESS;
+	}
+	catch (std::exception& e)
+	{
+		std::cerr << e.what() << std::endl;
+		return EXIT_FAILURE;
+	}
+}
+
 //FRONT END
 void spaces(unsigned short int n)
 {
@@ -433,7 +571,7 @@ void displayDestinationForItaly()
 	wait();
 	spaces(20);  cout << YELLOW << "_______________________________________________________" << RESET << endl;
 	wait();
-	cout << endl;
+	spaces(20); cout << "Enter destination: ";
 }
 
 void displayDestinationForFrance()
@@ -487,13 +625,14 @@ void displayDestinationForGermany()
 	wait();
 	spaces(20);  cout << YELLOW << "_______________________________________________________" << RESET << endl;
 	wait();
-	cout << endl;
+	spaces(20); cout << "Enter destination: ";
 }
 
 void flightChoiceItaly()
 {
 	int flightChoice;
 	double priceItaly;
+	string destinationItaly;
 	displayFlightsMenu();
 	cout << endl;
 	spaces(20); cout << "Enter an option: ";
@@ -519,6 +658,9 @@ void flightChoiceItaly()
 		break;
 	case 3:
 		displayDestinationForItaly();
+		cin >> destinationItaly;
+		cout << endl;
+		printFlightsFromItalyToDestination(destinationItaly);
 		break;
 	case 4:
 		break;
@@ -532,6 +674,7 @@ void flightChoiceFrance()
 {
 	int flightChoice;
 	double priceFrance;
+	string destinationFrance;
 	displayFlightsMenu();
 	cout << endl;
 	spaces(20); cout << "Enter an option: ";
@@ -557,6 +700,9 @@ void flightChoiceFrance()
 		break;
 	case 3:
 		displayDestinationForFrance();
+		cin >> destinationFrance;
+		cout << endl;
+		printFlightsFromFranceToDestination(destinationFrance);
 		break;
 	case 4:
 		break;
@@ -570,6 +716,7 @@ void flightChoiceGermany()
 {
 	int flightChoice;
 	double priceGermany;
+	string destinationGermany;
 	displayFlightsMenu();
 	cout << endl;
 	spaces(20); cout << "Enter an option: ";
@@ -595,6 +742,10 @@ void flightChoiceGermany()
 		break;
 	case 3:
 		displayDestinationForGermany();
+		cin >> destinationGermany;
+		cout << endl;
+		printFlightsFromGermanyToDestination(destinationGermany);
+		break;
 		break;
 	case 4:
 		break;
