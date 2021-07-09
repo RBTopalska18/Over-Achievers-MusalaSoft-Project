@@ -65,7 +65,7 @@ int printAllFlightsFromItaly()
 				<< ", "
 				<< result.get<nanodbc::string>("ArrivalDestination", "NULL")
 				<< ", "
-				<< result.get<double>("Price", -1)
+				<< result.get<double>("Price", -1) << " eu"
 				<< endl;
 		}
 
@@ -112,7 +112,7 @@ int printAllFlightsFromFrance()
 				<< ", "
 				<< result.get<nanodbc::string>("ArrivalDestination", "NULL")
 				<< ", "
-				<< result.get<double>("Price", -1)
+				<< result.get<double>("Price", -1) << " eu"
 				<< endl;
 		}
 
@@ -159,7 +159,7 @@ int printAllFlightsFromGermany()
 				<< ", "
 				<< result.get<nanodbc::string>("ArrivalDestination", "NULL")
 				<< ", "
-				<< result.get<double>("Price", -1)
+				<< result.get<double>("Price", -1) << " eu"
 				<< endl;
 		}
 
@@ -205,7 +205,7 @@ int printCheaperFlightsFromItaly(double priceItaly)
 				<< ", "
 				<< result.get<nanodbc::string>("ArrivalDestination", "NULL")
 				<< ", "
-				<< result.get<double>("Price", -1)
+				<< result.get<double>("Price", -1)<<" eu"
 				<< endl;
 		}
 
@@ -297,7 +297,7 @@ int printCheaperFlightsFromGermany(double priceGermany)
 				<< ", "
 				<< result.get<nanodbc::string>("ArrivalDestination", "NULL")
 				<< ", "
-				<< result.get<double>("Price", -1)
+				<< result.get<double>("Price", -1) << " eu"
 				<< endl;
 		}
 
@@ -343,7 +343,7 @@ int printFlightsFromItalyToDestination(string ArrivalDestination)
 				<< ", "
 				<< result.get<nanodbc::string>("ArrivalDestination", "NULL")
 				<< ", "
-				<< result.get<double>("Price", -1)
+				<< result.get<double>("Price", -1) << " eu"
 				<< endl;
 		}
 
@@ -389,7 +389,7 @@ int printFlightsFromFranceToDestination(string ArrivalDestination)
 				<< ", "
 				<< result.get<nanodbc::string>("ArrivalDestination", "NULL")
 				<< ", "
-				<< result.get<double>("Price", -1)
+				<< result.get<double>("Price", -1) << " eu"
 				<< endl;
 		}
 
@@ -435,7 +435,7 @@ int printFlightsFromGermanyToDestination(string ArrivalDestination)
 				<< ", "
 				<< result.get<nanodbc::string>("ArrivalDestination", "NULL")
 				<< ", "
-				<< result.get<double>("Price", -1)
+				<< result.get<double>("Price", -1) << " eu"
 				<< endl;
 		}
 
