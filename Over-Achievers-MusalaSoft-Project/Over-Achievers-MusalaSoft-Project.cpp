@@ -407,6 +407,88 @@ void displayCountry()
 	cout << endl;
 }
 
+void displayDestinationForItaly()
+{
+	cout << endl;
+	wait(500);
+	spaces(20);  cout << YELLOW << "_______________________________________________________" << RESET << endl;
+	wait();
+	spaces(20);  cout << "||                                                   ||" << endl;
+	wait();
+	spaces(20);  cout << YELLOW << "||                  _____DESTINATION_____            ||" << RESET << endl;
+	wait();
+	spaces(20);  cout << "||                                                   ||" << endl;
+	wait();
+	spaces(20);  cout << "||                   1.Germany,Berlin                ||" << endl;
+	wait();
+	spaces(20);  cout << "||                   2.France,Paris                  ||" << endl;
+	wait();
+	spaces(20);  cout << "||                   3.England,London                ||" << endl;
+	wait();
+	spaces(20);  cout << "||                   4.Spain,Barcelona               ||" << endl;
+	wait();
+	spaces(20);  cout << "||                   5.Turkey,Istanbul               ||" << endl;
+	wait();
+	spaces(20);  cout << YELLOW << "_______________________________________________________" << RESET << endl;
+	wait();
+	cout << endl;
+}
+
+void displayDestinationForFrance()
+{
+	cout << endl;
+	wait(500);
+	spaces(20);  cout << YELLOW << "_______________________________________________________" << RESET << endl;
+	wait();
+	spaces(20);  cout << "||                                                   ||" << endl;
+	wait();
+	spaces(20);  cout << YELLOW << "||                  _____DESTINATION_____            ||" << RESET << endl;
+	wait();
+	spaces(20);  cout << "||                                                   ||" << endl;
+	wait();
+	spaces(20);  cout << "||                   1.Romania,Bucharest             ||" << endl;
+	wait();
+	spaces(20);  cout << "||                   2.South Korea,Seoul             ||" << endl;
+	wait();
+	spaces(20);  cout << "||                   3.Ukraine,Kyiv                  ||" << endl;
+	wait();
+	spaces(20);  cout << "||                   4.Germany,Hamburt               ||" << endl;
+	wait();
+	spaces(20);  cout << "||                   5.Bulgaria,Sofia                ||" << endl;
+	wait();
+	spaces(20);  cout << YELLOW << "_______________________________________________________" << RESET << endl;
+	wait();
+	cout << endl;
+}
+
+void displayDestinationForGermany()
+{
+	cout << endl;
+	wait(500);
+	spaces(20);  cout << YELLOW << "_______________________________________________________" << RESET << endl;
+	wait();
+	spaces(20);  cout << "||                                                   ||" << endl;
+	wait();
+	spaces(20);  cout << YELLOW << "||                  _____DESTINATION_____            ||" << RESET << endl;
+	wait();
+	spaces(20);  cout << "||                                                   ||" << endl;
+	wait();
+	spaces(20);  cout << "||                   1.France,Paris                  ||" << endl;
+	wait();
+	spaces(20);  cout << "||                   2.Brazil,Rio de Janeiro         ||" << endl;
+	wait();
+	spaces(20);  cout << "||                   3.USA,New York                  ||" << endl;
+	wait();
+	spaces(20);  cout << "||                   4.Egypt,Cairo                   ||" << endl;
+	wait();
+	spaces(20);  cout << "||                   5.Georgia,Atlanta               ||" << endl;
+	wait();
+	spaces(20);  cout << YELLOW << "_______________________________________________________" << RESET << endl;
+	wait();
+	cout << endl;
+}
+
+
 void flightChoiceItaly()
 {
 	int flightChoice;
@@ -565,6 +647,6 @@ void printMenu()
 
 int main()
 {
-	printMenu();
+	
 }
 
