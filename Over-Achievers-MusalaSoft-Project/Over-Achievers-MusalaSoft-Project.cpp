@@ -310,7 +310,7 @@ int printCheaperFlightsFromGermany(double priceGermany)
 	}
 }
 
-int printFlightsFromItalyToDestination(string ArrivalDestination)
+int printFlightsFromItalyToDestination(string arrivalDestination)
 {
 	try {
 		auto const connstr = NANODBC_TEXT("Driver={ODBC Driver 17 for SQL Server};Server=(localdb)\\MSSQLLocalDB;Database=AirPort;Trusted_Connection=yes;");
@@ -329,7 +329,7 @@ int printFlightsFromItalyToDestination(string ArrivalDestination)
               
     )");
 		string name1 = "Italy,Venice";
-		stmt.bind(0, ArrivalDestination.c_str());
+		stmt.bind(0, arrivalDestination.c_str());
 		stmt.bind(1, name1.c_str());
 		auto result = nanodbc::execute(stmt);
 
@@ -356,7 +356,7 @@ int printFlightsFromItalyToDestination(string ArrivalDestination)
 	}
 }
 
-int printFlightsFromFranceToDestination(string ArrivalDestination)
+int printFlightsFromFranceToDestination(string arrivalDestination)
 {
 	try {
 		auto const connstr = NANODBC_TEXT("Driver={ODBC Driver 17 for SQL Server};Server=(localdb)\\MSSQLLocalDB;Database=AirPort;Trusted_Connection=yes;");
@@ -375,7 +375,7 @@ int printFlightsFromFranceToDestination(string ArrivalDestination)
               
     )");
 		string name1 = "France,Paris";
-		stmt.bind(0, ArrivalDestination.c_str());
+		stmt.bind(0, arrivalDestination.c_str());
 		stmt.bind(1, name1.c_str());
 		auto result = nanodbc::execute(stmt);
 
@@ -402,7 +402,7 @@ int printFlightsFromFranceToDestination(string ArrivalDestination)
 	}
 }
 
-int printFlightsFromGermanyToDestination(string ArrivalDestination)
+int printFlightsFromGermanyToDestination(string arrivalDestination)
 {
 	try {
 		auto const connstr = NANODBC_TEXT("Driver={ODBC Driver 17 for SQL Server};Server=(localdb)\\MSSQLLocalDB;Database=AirPort;Trusted_Connection=yes;");
@@ -421,7 +421,7 @@ int printFlightsFromGermanyToDestination(string ArrivalDestination)
               
     )");
 		string name1 = "Germany,Berlin";
-		stmt.bind(0, ArrivalDestination.c_str());
+		stmt.bind(0, arrivalDestination.c_str());
 		stmt.bind(1, name1.c_str());
 		auto result = nanodbc::execute(stmt);
 
@@ -444,6 +444,51 @@ int printFlightsFromGermanyToDestination(string ArrivalDestination)
 	catch (std::exception& e)
 	{
 		std::cerr << e.what() << std::endl;
+		return EXIT_FAILURE;
+	}
+}
+
+int printFlightsTimeForFrance(string time)
+{
+	try {
+		auto const connstr = NANODBC_TEXT("Driver={ODBC Driver 17 for SQL Server};Server=(localdb)\\MSSQLLocalDB;Database=AirPort;Trusted_Connection=yes;");
+		nanodbc::connection conn(connstr);
+
+		nanodbc::statement stmt(conn);
+
+		nanodbc::prepare(stmt, R"(
+            SELECT TOP (1000) [CountryId]
+                  ,[Name]
+                  ,[Time]
+                  ,[ArrivalDestination]
+                  ,[Price]
+              FROM [AirPort].[dbo].[Country]
+              WHERE  ArrivalDestination = ? AND Time = ?
+              
+    )");
+		string name1 = "France,Paris";
+		stmt.bind(0, time.c_str());
+		auto result = nanodbc::execute(stmt);
+
+		while (result.next())
+		{
+			std::cout << result.get<int>("CountryId", -1)
+				<< ", "
+				<< result.get<nanodbc::string>("Name", "NULL")
+				<< ", "
+				<< result.get<nanodbc::string>("Time", "NULL")
+				<< ", "
+				<< result.get<nanodbc::string>("ArrivalDestination", "NULL")
+				<< ", "
+				<< result.get<double>("Price", -1) << " eu"
+				<< endl;
+		}
+
+		return EXIT_SUCCESS;
+	}
+	catch (std::exception& e)
+	{
+		cout << "There's not flight for " << time << "!"<<endl;
 		return EXIT_FAILURE;
 	}
 }
@@ -633,6 +678,7 @@ void flightChoiceItaly()
 	int flightChoice;
 	double priceItaly;
 	string destinationItaly;
+	string time;
 	displayFlightsMenu();
 	cout << endl;
 	spaces(20); cout << "Enter an option: ";
@@ -648,21 +694,53 @@ void flightChoiceItaly()
 	switch (flightChoice)
 	{
 	case 1:
-		printAllFlightsFromItaly();
+		if (printAllFlightsFromItaly())
+		{
+			flightChoiceItaly();
+		}
+		else
+		{
+			exit(0);
+		}
 		break;
 	case 2:
 		cout << "Enter the biggest price you can allow:";
 		cin >> priceItaly;
 		cout << endl;
-		printCheaperFlightsFromItaly(priceItaly);
+		if (printCheaperFlightsFromItaly(priceItaly))
+		{
+			flightChoiceItaly();
+		}
+		else
+		{
+			exit(0);
+		}
 		break;
 	case 3:
 		displayDestinationForItaly();
 		cin >> destinationItaly;
 		cout << endl;
-		printFlightsFromItalyToDestination(destinationItaly);
+		if (printFlightsFromItalyToDestination(destinationItaly))
+		{
+			flightChoiceItaly();
+		}
+		else
+		{
+			exit(0);
+		}
 		break;
 	case 4:
+		cin >> time;
+		cout << endl;
+		/*if (printFlightsTimeForItaly(time))
+		{
+			flightChoiceFrance();
+		}
+		else
+		{
+			exit(0);
+		}*/
+
 		break;
 	case 5:
 		exit(0);
@@ -675,6 +753,7 @@ void flightChoiceFrance()
 	int flightChoice;
 	double priceFrance;
 	string destinationFrance;
+	string time;
 	displayFlightsMenu();
 	cout << endl;
 	spaces(20); cout << "Enter an option: ";
@@ -690,21 +769,53 @@ void flightChoiceFrance()
 	switch (flightChoice)
 	{
 	case 1:
-		printAllFlightsFromFrance();
+		if (printAllFlightsFromFrance())
+		{
+			flightChoiceFrance();
+		}
+		else
+		{
+			exit(0);
+		}
 		break;
 	case 2:
 		cout << "Enter the biggest price you can allow:";
 		cin >> priceFrance;
 		cout << endl;
-		printCheaperFlightsFromFrance(priceFrance);
+		if (printCheaperFlightsFromFrance(priceFrance))
+		{
+			flightChoiceFrance();
+		}
+		else
+		{
+			exit(0);
+		}
 		break;
 	case 3:
 		displayDestinationForFrance();
 		cin >> destinationFrance;
 		cout << endl;
-		printFlightsFromFranceToDestination(destinationFrance);
+		if (printFlightsFromFranceToDestination(destinationFrance))
+		{
+			flightChoiceFrance();
+		}
+		else
+		{
+			exit(0);
+		}
 		break;
 	case 4:
+		cin >> time;
+		cout << endl;
+		if (printFlightsTimeForFrance(time))
+		{
+			flightChoiceFrance();
+		}
+		else
+		{
+			exit(0);
+		}
+
 		break;
 	case 5:
 		exit(0);
@@ -717,6 +828,7 @@ void flightChoiceGermany()
 	int flightChoice;
 	double priceGermany;
 	string destinationGermany;
+	string time;
 	displayFlightsMenu();
 	cout << endl;
 	spaces(20); cout << "Enter an option: ";
@@ -732,22 +844,53 @@ void flightChoiceGermany()
 	switch (flightChoice)
 	{
 	case 1:
-		printAllFlightsFromGermany();
+		if (printAllFlightsFromGermany())
+		{
+			flightChoiceGermany();
+		}
+		else
+		{
+			exit(0);
+		}
 		break;
 	case 2:
 		cout << "Enter the biggest price you can allow:";
 		cin >> priceGermany;
 		cout << endl;
-		printCheaperFlightsFromGermany(priceGermany);
+		if (printCheaperFlightsFromGermany(priceGermany))
+		{
+			flightChoiceGermany();
+		}
+		else
+		{
+			exit(0);
+		}
 		break;
 	case 3:
 		displayDestinationForGermany();
 		cin >> destinationGermany;
 		cout << endl;
-		printFlightsFromGermanyToDestination(destinationGermany);
-		break;
+		if (printFlightsFromGermanyToDestination(destinationGermany))
+		{
+			flightChoiceGermany();
+		}
+		else
+		{
+			exit(0);
+		}
 		break;
 	case 4:
+		cin >> time;
+		cout << endl;
+		/*if (printFlightsTimeForGermany(time))
+		{
+			flightChoiceGermany();
+		}
+		else
+		{
+			exit(0);
+		}*/
+
 		break;
 	case 5:
 		exit(0);
@@ -815,5 +958,6 @@ void printMenu()
 int main()
 {
 	printMenu();
+	system("pause");
 }
 
