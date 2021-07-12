@@ -11,6 +11,8 @@
 #include <thread>
 #include <nanodbc.h>
 #include <exception>
+#include <algorithm>
+#include <cstring>
 
 
 using namespace std;
@@ -587,7 +589,28 @@ int printFlightsTimeForGermany(string timeGermany)
 	}
 }
 
+int insertTicket(int countryId) {
+	try {
+		auto const connstr = NANODBC_TEXT("Driver={ODBC Driver 17 for SQL Server};Server=(localdb)\\MSSQLLocalDB;Database=AirPort;Trusted_Connection=yes;");
+		nanodbc::connection conn(connstr);
 
+		nanodbc::statement stmt(conn);
+
+		nanodbc::prepare(stmt, "insert into AirPort.dbo.Tickets (Id, CountrtId) values (?, ?);");
+		const int eight_int = 0;
+		stmt.bind(0, &eight_int);
+		stmt.bind(1, &countryId);
+		execute(stmt);
+		
+
+		return EXIT_SUCCESS;
+	}
+	catch (...)
+	{
+		cout << "You cannot add this ticket!" << endl;
+		return EXIT_FAILURE;
+	}
+}
 
 //FRONT END
 void spaces(unsigned short int n)
@@ -775,6 +798,7 @@ void flightChoiceItaly()
 	double priceItaly;
 	string destinationItaly;
 	string timeItaly;
+	int ticketChoice;
 	displayFlightsMenu();
 	cout << endl;
 	spaces(20); cout << "Enter an option: ";
@@ -792,7 +816,12 @@ void flightChoiceItaly()
 	case 1:
 		if (printAllFlightsFromItaly())
 		{
-			flightChoiceItaly();
+			exit(0);
+		}
+		else
+		{
+			cin >> ticketChoice;
+			insertTicket(ticketChoice);
 		}
 
 		break;
@@ -802,7 +831,12 @@ void flightChoiceItaly()
 		cout << endl;
 		if (printCheaperFlightsFromItaly(priceItaly))
 		{
-			flightChoiceItaly();
+			exit(0);
+		}
+		else
+		{
+			cin >> ticketChoice;
+			insertTicket(ticketChoice);
 		}
 
 		break;
@@ -812,7 +846,12 @@ void flightChoiceItaly()
 		cout << endl;
 		if (printFlightsFromItalyToDestination(destinationItaly))
 		{
-			flightChoiceItaly();
+			exit(0);
+		}
+		else
+		{
+			cin >> ticketChoice;
+			insertTicket(ticketChoice);
 		}
 
 		break;
@@ -820,8 +859,13 @@ void flightChoiceItaly()
 		cin >> timeItaly;
 		cout << endl;
 		if (printFlightsTimeForItaly(timeItaly))
-		{			
-			flightChoiceItaly();
+		{
+			exit(0);
+		}
+		else
+		{
+			cin >> ticketChoice;
+			insertTicket(ticketChoice);
 		}
 
 
@@ -835,6 +879,7 @@ void flightChoiceItaly()
 void flightChoiceFrance()
 {
 	int flightChoice;
+	int ticketChoice;
 	double priceFrance;
 	string destinationFrance;
 	string timeFrance;
@@ -855,7 +900,12 @@ void flightChoiceFrance()
 	case 1:
 		if (printAllFlightsFromFrance())
 		{
-			flightChoiceFrance();
+			exit(0);
+		}
+		else
+		{
+			cin >> ticketChoice;
+			insertTicket(ticketChoice);
 		}
 
 		break;
@@ -865,7 +915,12 @@ void flightChoiceFrance()
 		cout << endl;
 		if (printCheaperFlightsFromFrance(priceFrance))
 		{
-			flightChoiceFrance();
+			exit(0);
+		}
+		else
+		{
+			cin >> ticketChoice;
+			insertTicket(ticketChoice);
 		}
 		break;
 	case 3:
@@ -874,7 +929,12 @@ void flightChoiceFrance()
 		cout << endl;
 		if (printFlightsFromFranceToDestination(destinationFrance))
 		{
-			flightChoiceFrance();
+			exit(0);
+		}
+		else
+		{
+			cin >> ticketChoice;
+			insertTicket(ticketChoice);
 		}
 		break;
 	case 4:
@@ -882,7 +942,12 @@ void flightChoiceFrance()
 		cout << endl;
 		if (printFlightsTimeForFrance(timeFrance))
 		{
-			flightChoiceFrance();
+			exit(0);
+		}
+		else
+		{
+			cin >> ticketChoice;
+			insertTicket(ticketChoice);
 		}
 
 		break;
@@ -895,6 +960,7 @@ void flightChoiceFrance()
 void flightChoiceGermany()
 {
 	int flightChoice;
+	int ticketChoice;
 	double priceGermany;
 	string destinationGermany;
 	string timeGermany;
@@ -915,7 +981,12 @@ void flightChoiceGermany()
 	case 1:
 		if (printAllFlightsFromGermany())
 		{
-			flightChoiceGermany();
+			exit(0);
+		}
+		else
+		{
+			cin >> ticketChoice;
+			insertTicket(ticketChoice);
 		}
 		break;
 	case 2:
@@ -924,7 +995,12 @@ void flightChoiceGermany()
 		cout << endl;
 		if (printCheaperFlightsFromGermany(priceGermany))
 		{
-			flightChoiceGermany();
+			exit(0);
+		}
+		else
+		{
+			cin >> ticketChoice;
+			insertTicket(ticketChoice);
 		}
 		break;
 	case 3:
@@ -933,14 +1009,24 @@ void flightChoiceGermany()
 		cout << endl;
 		if (printFlightsFromGermanyToDestination(destinationGermany))
 		{
-			flightChoiceGermany();
+			exit(0);
+		}
+		else
+		{
+			cin >> ticketChoice;
+			insertTicket(ticketChoice);
 		}
 	case 4:
 		cin >> timeGermany;
 		cout << endl;
 		if (printFlightsTimeForGermany(timeGermany))
 		{
-			flightChoiceGermany();
+			exit(0);
+		}
+		else
+		{
+			cin >> ticketChoice;
+			insertTicket(ticketChoice);
 		}
 
 		break;
