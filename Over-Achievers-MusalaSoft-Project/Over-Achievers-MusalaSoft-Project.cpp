@@ -613,18 +613,16 @@ int insertTicket(int countryId) {
 
 		nanodbc::statement stmt(conn);
 
-		nanodbc::prepare(stmt, "insert into AirPort.dbo.Tickets (Id, CountrtId) values (?, ?);");
-		const int eight_int = 0;
-		stmt.bind(0, &eight_int);
-		stmt.bind(1, &countryId);
+		nanodbc::prepare(stmt, "insert into AirPort.dbo.Tickets (CountryId) values (?);");
+		stmt.bind(0, &countryId);
 		execute(stmt);
 		
 
 		return EXIT_SUCCESS;
 	}
-	catch (...)
+	catch (const exception& e)
 	{
-		cout << "You cannot add this ticket!" << endl;
+		cout << e.what() << endl;
 		return EXIT_FAILURE;
 	}
 }
@@ -642,7 +640,7 @@ void wait(int delay)
 {
 	if (ANIMATION_ENABLED)
 	{
-		this_thread::sleep_for(chrono::milliseconds(delay));
+		//this_thread::sleep_for(chrono::milliseconds(delay));
 	}
 }
 
@@ -654,7 +652,7 @@ void welcome()
 	spaces(20); cout << YELLOW << "*******************************************************" << RESET << endl;
 
 }
-
+	
 void displayFlightsMenu()
 {
 	cout << endl;
