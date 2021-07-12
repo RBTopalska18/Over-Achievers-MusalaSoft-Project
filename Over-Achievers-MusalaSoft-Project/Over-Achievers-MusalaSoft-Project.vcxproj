@@ -142,7 +142,13 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="DataLayer.cpp" />
     <ClCompile Include="Over-Achievers-MusalaSoft-Project.cpp" />
+    <ClCompile Include="PresentationLayer.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="DataLayer.h" />
+    <ClInclude Include="PresentationLayer.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
