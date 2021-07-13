@@ -22,11 +22,12 @@ Download the program from [github](https://github.com/RBTopalska18/Over-Achiever
 
 ## <img src="https://media.discordapp.net/attachments/856937460567113728/861851415495442452/tmp_1625551760215.jpg" width="70"> Used technologies
 - <img src="https://media.discordapp.net/attachments/815253581149896790/818134527842582578/Visual_Studio_Icon_2019.svg.png?width=541&height=541" width="20"> Visual studio
-- <img src="https://media.discordapp.net/attachments/856937460567113728/864069442995224587/dada.png" width="40"> Microsoft SQL Server Management Studio
+- <img src="https://media.discordapp.net/attachments/856937460567113728/864409737583525938/tmp_1626161723170.jpg" width="20"> Visual Studio Code
+- <img src="https://media.discordapp.net/attachments/856937460567113728/864409734836912138/tmp_1626161724812.jpg" width="20"> Microsoft SQL Server Management Studio
 -  <img src="https://media.discordapp.net/attachments/815253581149896790/818133539903111188/Microsoft_Word_logo.png" width="20"> Word
 - <img src="https://media.discordapp.net/attachments/815253581149896790/818136011359518780/kisspng-microsoft-powerpoint-computer-software-microsoft-o-5b3b3927c75c49.3318087715306079118166-rem.png" width="20"> PowerPoint
 
 
- For programming language we used C++.
+ For programming language I used C++, HTML, CSS and Java Script.
  
  ---
