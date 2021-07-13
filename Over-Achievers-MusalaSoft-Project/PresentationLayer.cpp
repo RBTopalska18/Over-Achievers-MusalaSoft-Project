@@ -205,8 +205,30 @@ void displayDestinationForGermany()
 	spaces(20); cout << "Enter destination: ";
 }
 
+void displayTicketOutMenu()
+{
+	cout << endl;
+	wait(500);
+	spaces(20);  cout << YELLOW << "_______________________________________________________" << RESET << endl;
+	wait();
+	spaces(20);  cout << "||                                                   ||" << endl;
+	wait();
+	spaces(20);  cout << YELLOW << "||                  _____MENU_____                  ||" << RESET << endl;
+	wait();
+	spaces(20);  cout << "||                                                   ||" << endl;
+	wait();
+	spaces(20);  cout << "||                   1.Reserve another ticket        ||" << endl;
+	wait();
+	spaces(20);  cout << "||                   2. Exit                         ||" << endl;
+	wait();
+	spaces(20);  cout << YELLOW << "_______________________________________________________" << RESET << endl;
+	wait();
+	cout << endl;
+}
+
 void flightChoiceItaly()
 {
+	int ticketOutChoice;
 	int flightChoice;
 	double priceItaly;
 	string destinationItaly;
@@ -243,6 +265,25 @@ void flightChoiceItaly()
 				ticketChoice = readInt();
 			}
 			insertTicket(ticketChoice);
+			displayTicketOutMenu();
+			cout << endl;
+			spaces(20); cout << "Enter the option you want: ";
+			cin >> ticketOutChoice;
+			while (ticketOutChoice > 2 || ticketOutChoice < 1)
+			{
+				cout << endl;
+				cout << RED << "You have to enter a number between 1 and 2! Please try again!" << RESET;
+				ticketChoice = readInt();
+			}
+			switch (ticketOutChoice)
+			{
+			case 1:
+				flightChoiceItaly();
+				break;
+			case 2:
+				exit(0);
+				break;
+			}
 		}
 
 		break;
@@ -260,11 +301,32 @@ void flightChoiceItaly()
 			cout << "Enter the number of the ticket: ";
 			cin >> ticketChoice;
 			insertTicket(ticketChoice);
+			displayTicketOutMenu();
+			cout << endl;
+			spaces(20); cout << "Enter the option you want: ";
+			cin >> ticketOutChoice;
+			while (ticketOutChoice > 2 || ticketOutChoice < 1)
+			{
+				cout << endl;
+				cout << RED << "You have to enter a number between 1 and 2! Please try again!" << RESET;
+				ticketChoice = readInt();
+			}
+			switch (ticketOutChoice)
+			{
+			case 1:
+				flightChoiceItaly();
+				break;
+			case 2:
+				exit(0);
+				break;
+			}
 		}
 
 		break;
 	case 3:
 		displayDestinationForItaly();
+		cout << endl;
+		cout << "Type the destination, not the number: ";
 		cin >> destinationItaly;
 		cout << endl;
 		if (printFlightsFromItalyToDestination(destinationItaly))
@@ -277,10 +339,30 @@ void flightChoiceItaly()
 			cout << "Enter the number of the ticket: ";
 			cin >> ticketChoice;
 			insertTicket(ticketChoice);
+			displayTicketOutMenu();
+			cout << endl;
+			spaces(20); cout << "Enter the option you want: ";
+			cin >> ticketOutChoice;
+			while (ticketOutChoice > 2 || ticketOutChoice < 1)
+			{
+				cout << endl;
+				cout << RED << "You have to enter a number between 1 and 2! Please try again!" << RESET;
+				ticketChoice = readInt();
+			}
+			switch (ticketOutChoice)
+			{
+			case 1:
+				flightChoiceItaly();
+				break;
+			case 2:
+				exit(0);
+				break;
+			}
 		}
 
 		break;
 	case 4:
+		cout << "Enter the time you want to fly: ";
 		cin >> timeItaly;
 		cout << endl;
 		if (printFlightsTimeForItaly(timeItaly))
@@ -293,6 +375,25 @@ void flightChoiceItaly()
 			cout << "Enter the number of the ticket: ";
 			cin >> ticketChoice;
 			insertTicket(ticketChoice);
+			displayTicketOutMenu();
+			cout << endl;
+			spaces(20); cout << "Enter the option you want: ";
+			cin >> ticketOutChoice;
+			while (ticketOutChoice > 2 || ticketOutChoice < 1)
+			{
+				cout << endl;
+				cout << RED << "You have to enter a number between 1 and 2! Please try again!" << RESET;
+				ticketChoice = readInt();
+			}
+			switch (ticketOutChoice)
+			{
+			case 1:
+				flightChoiceItaly();
+				break;
+			case 2:
+				exit(0);
+				break;
+			}
 		}
 
 
@@ -305,6 +406,7 @@ void flightChoiceItaly()
 
 void flightChoiceFrance()
 {
+	int ticketOutChoice;
 	int flightChoice;
 	int ticketChoice;
 	double priceFrance;
@@ -340,6 +442,25 @@ void flightChoiceFrance()
 				ticketChoice = readInt();
 			}
 			insertTicket(ticketChoice);
+			displayTicketOutMenu();
+			cout << endl;
+			spaces(20); cout << "Enter the option you want: ";
+			cin >> ticketOutChoice;
+			while (ticketOutChoice > 2 || ticketOutChoice < 1)
+			{
+				cout << endl;
+				cout << RED << "You have to enter a number between 1 and 2! Please try again!" << RESET;
+				ticketChoice = readInt();
+			}
+			switch (ticketOutChoice)
+			{
+			case 1:
+				flightChoiceFrance();
+				break;
+			case 2:
+				exit(0);
+				break;
+			}
 		}
 
 		break;
@@ -357,9 +478,30 @@ void flightChoiceFrance()
 			cout << "Enter the number of the ticket: ";
 			cin >> ticketChoice;
 			insertTicket(ticketChoice);
+			displayTicketOutMenu();
+			cout << endl;
+			spaces(20); cout << "Enter the option you want: ";
+			cin >> ticketOutChoice;
+			while (ticketOutChoice > 2 || ticketOutChoice < 1)
+			{
+				cout << endl;
+				cout << RED << "You have to enter a number between 1 and 2! Please try again!" << RESET;
+				ticketChoice = readInt();
+			}
+			switch (ticketOutChoice)
+			{
+			case 1:
+				flightChoiceFrance();
+				break;
+			case 2:
+				exit(0);
+				break;
+			}
 		}
 		break;
 	case 3:
+		cout << endl;
+		cout << "Type the destination, not the number: ";
 		displayDestinationForFrance();
 		cin >> destinationFrance;
 		cout << endl;
@@ -373,9 +515,29 @@ void flightChoiceFrance()
 			cout << "Enter the number of the ticket: ";
 			cin >> ticketChoice;
 			insertTicket(ticketChoice);
+			displayTicketOutMenu();
+			cout << endl;
+			spaces(20); cout << "Enter the option you want: ";
+			cin >> ticketOutChoice;
+			while (ticketOutChoice > 2 || ticketOutChoice < 1)
+			{
+				cout << endl;
+				cout << RED << "You have to enter a number between 1 and 2! Please try again!" << RESET;
+				ticketChoice = readInt();
+			}
+			switch (ticketOutChoice)
+			{
+			case 1:
+				flightChoiceFrance();
+				break;
+			case 2:
+				exit(0);
+				break;
+			}
 		}
 		break;
 	case 4:
+		cout << "Enter the time you want to fly: ";
 		cin >> timeFrance;
 		cout << endl;
 		if (printFlightsTimeForFrance(timeFrance))
@@ -388,6 +550,25 @@ void flightChoiceFrance()
 			cout << "Enter the number of the ticket: ";
 			cin >> ticketChoice;
 			insertTicket(ticketChoice);
+			displayTicketOutMenu();
+			cout << endl;
+			spaces(20); cout << "Enter the option you want: ";
+			cin >> ticketOutChoice;
+			while (ticketOutChoice > 2 || ticketOutChoice < 1)
+			{
+				cout << endl;
+				cout << RED << "You have to enter a number between 1 and 2! Please try again!" << RESET;
+				ticketChoice = readInt();
+			}
+			switch (ticketOutChoice)
+			{
+			case 1:
+				flightChoiceFrance();
+				break;
+			case 2:
+				exit(0);
+				break;
+			}
 		}
 
 		break;
@@ -399,6 +580,7 @@ void flightChoiceFrance()
 
 void flightChoiceGermany()
 {
+	int ticketOutChoice;
 	int flightChoice;
 	int ticketChoice;
 	double priceGermany;
@@ -435,6 +617,26 @@ void flightChoiceGermany()
 				ticketChoice = readInt();
 			}
 			insertTicket(ticketChoice);
+			displayTicketOutMenu();
+			cout << endl;
+			spaces(20); cout << "Enter the option you want: ";
+			cin >> ticketOutChoice;
+			while (ticketOutChoice > 2 || ticketOutChoice < 1)
+			{
+				cout << endl;
+				cout << RED << "You have to enter a number between 1 and 2! Please try again!" << RESET;
+				ticketChoice = readInt();
+			}
+			switch (ticketOutChoice)
+			{
+			case 1:
+				flightChoiceGermany();
+				break;
+			case 2:
+				exit(0);
+				break;
+			}
+
 		}
 		break;
 	case 2:
@@ -451,10 +653,31 @@ void flightChoiceGermany()
 			cout << "Enter the number of the ticket: ";
 			cin >> ticketChoice;
 			insertTicket(ticketChoice);
+			displayTicketOutMenu();
+			cout << endl;
+			spaces(20); cout << "Enter the option you want: ";
+			cin >> ticketOutChoice;
+			while (ticketOutChoice > 2 || ticketOutChoice < 1)
+			{
+				cout << endl;
+				cout << RED << "You have to enter a number between 1 and 2! Please try again!" << RESET;
+				ticketChoice = readInt();
+			}
+			switch (ticketOutChoice)
+			{
+			case 1:
+				flightChoiceGermany();
+				break;
+			case 2:
+				exit(0);
+				break;
+			}
 		}
 		break;
 	case 3:
 		displayDestinationForGermany();
+		cout << endl;
+		cout << "Type the destination, not the number: ";
 		cin >> destinationGermany;
 		cout << endl;
 		if (printFlightsFromGermanyToDestination(destinationGermany))
@@ -467,8 +690,28 @@ void flightChoiceGermany()
 			cout << "Enter the number of the ticket: ";
 			cin >> ticketChoice;
 			insertTicket(ticketChoice);
+			displayTicketOutMenu();
+			cout << endl;
+			spaces(20); cout << "Enter the option you want: ";
+			cin >> ticketOutChoice;
+			while (ticketOutChoice > 2 || ticketOutChoice < 1)
+			{
+				cout << endl;
+				cout << RED << "You have to enter a number between 1 and 2! Please try again!" << RESET;
+				ticketChoice = readInt();
+			}
+			switch (ticketOutChoice)
+			{
+			case 1:
+				flightChoiceGermany();
+				break;
+			case 2:
+				exit(0);
+				break;
+			}
 		}
 	case 4:
+		cout << "Enter the time you want to fly: ";
 		cin >> timeGermany;
 		cout << endl;
 		if (printFlightsTimeForGermany(timeGermany))
@@ -481,6 +724,25 @@ void flightChoiceGermany()
 			cout << "Enter the number of the ticket: ";
 			cin >> ticketChoice;
 			insertTicket(ticketChoice);
+			displayTicketOutMenu();
+			cout << endl;
+			spaces(20); cout << "Enter the option you want: ";
+			cin >> ticketOutChoice;
+			while (ticketOutChoice > 2 || ticketOutChoice < 1)
+			{
+				cout << endl;
+				cout << RED << "You have to enter a number between 1 and 2! Please try again!" << RESET;
+				ticketChoice = readInt();
+			}
+			switch (ticketOutChoice)
+			{
+			case 1:
+				flightChoiceGermany();
+				break;
+			case 2:
+				exit(0);
+				break;
+			}
 		}
 
 		break;
